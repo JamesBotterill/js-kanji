@@ -1,0 +1,109 @@
+# Semantic-Kanji System: More Character Mappings
+
+## Express/Web Frameworks
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `速`  | express        |
+| `応`  | app            |
+| `中`  | middleware     |
+| `固`  | static         |
+| `会`  | session        |
+| `点`  | cookie         |
+| `体`  | body           |
+| `引`  | params         |
+| `問`  | query          |
+
+## Database Operations
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `庫`  | database       |
+| `接`  | connect        |
+| `集`  | collection     |
+| `件`  | document       |
+| `型`  | model          |
+| `図`  | schema         |
+| `探`  | find           |
+| `検`  | findOne        |
+| `索`  | findById       |
+| `存`  | save           |
+| `更`  | update         |
+| `除`  | remove         |
+| `造`  | create         |
+| `削`  | delete         |
+
+## Promise/Async
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `約`  | Promise        |
+| `決`  | resolve        |
+| `否`  | reject         |
+| `続`  | then           |
+| `獲`  | catch          |
+| `終`  | finally        |
+
+## Array Methods
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `写`  | map            |
+| `濾`  | filter         |
+| `縮`  | reduce         |
+| `各`  | forEach        |
+| `一`  | some           |
+| `皆`  | every          |
+| `見`  | find           |
+| `含`  | includes       |
+| `添`  | push           |
+| `取`  | pop            |
+| `抜`  | shift          |
+| `挿`  | unshift        |
+
+## String Methods
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `割`  | split          |
+| `繋`  | join           |
+| `換`  | replace        |
+| `合`  | match          |
+| `切`  | slice          |
+| `部`  | substring      |
+| `整`  | trim           |
+| `低`  | toLowerCase    |
+| `高`  | toUpperCase    |
+
+## Common Variable Names
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `資`  | data           |
+| `果`  | result         |
+| `選`  | options        |
+| `設`  | config         |
+| `者`  | user           |
+| `品`  | item           |
+| `位`  | index          |
+| `鍵`  | key            |
+| `値`  | value          |
+| `名`  | name           |
+| `番`  | id             |
+| `所`  | url            |
+| `跡`  | path           |
+
+## Web Scraping Specific
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `送信` | axios          |
+| `解析` | cheerio        |
+| `解`  | parse          |
+| `収`  | scrape         |
+| `抽`  | extract        |
+| `指`  | selector       |
+| `素`  | element        |
+| `属`  | attribute      |
+| `頁`  | html           |
+| `字`  | text           |

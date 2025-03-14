@@ -1,0 +1,85 @@
+{
+  "name": "semantic-kanji-js",
+  "version": "1.0.0",
+  "description": "Ultra-efficient JavaScript compression for LLM communication using Semantic-Kanji",
+  "main": "index.js",
+  "browser": "browser.js",
+  "types": "index.d.ts",
+  "bin": {
+    "js-kanji": "./bin/js-kanji.js",
+    "llm-interaction": "./bin/llm-interaction.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "lint": "eslint .",
+    "example": "node examples/integration-examples.js"
+  },
+  "files": [
+    "index.js",
+    "browser.js",
+    "index.d.ts",
+    "semantic-kanji.js",
+    "semantic-kanji-module.js",
+    "js-kanji.js",
+    "js-mini.js",
+    "utils.js",
+    "prompt-generator.js",
+    "js-kanji-converter.js",
+    "llm-interaction.js",
+    "bin",
+    "dictionaries",
+    "examples",
+    "README.md",
+    "INTEGRATION.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "javascript",
+    "compression",
+    "llm",
+    "token-efficient",
+    "kanji",
+    "semantic",
+    "claude",
+    "gpt",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/semantic-kanji-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/semantic-kanji-js/issues"
+  },
+  "homepage": "https://github.com/yourusername/semantic-kanji-js#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0"
+  },
+  "peerDependencies": {
+    "@anthropic-ai/sdk": "^0.6.2",
+    "openai": "^4.12.1"
+  },
+  "peerDependenciesMeta": {
+    "@anthropic-ai/sdk": {
+      "optional": true
+    },
+    "openai": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "eslint": "^8.45.0",
+    "jest": "^29.6.1",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,86 @@
+# Semantic-Kanji System: Character Mapping Dictionary
+
+## Core JavaScript Keywords
+
+| Kanji | JavaScript Keyword |
+|-------|-------------------|
+| `関`  | function          |
+| `返`  | return            |
+| `定`  | const             |
+| `変`  | let               |
+| `数`  | var               |
+| `条`  | if                |
+| `他`  | else              |
+| `繰`  | for               |
+| `間`  | while             |
+| `試`  | try               |
+| `捕`  | catch             |
+| `投`  | throw             |
+| `待`  | await             |
+| `非`  | async             |
+| `類`  | class             |
+| `入`  | import            |
+| `出`  | export            |
+| `既`  | default           |
+| `新`  | new               |
+| `自`  | this              |
+| `真`  | true              |
+| `偽`  | false             |
+| `無`  | null              |
+| `未`  | undefined         |
+
+## Common JavaScript Built-ins
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `物`  | Object         |
+| `列`  | Array          |
+| `文`  | String         |
+| `数`  | Number         |
+| `論`  | Boolean        |
+| `日`  | Date           |
+| `算`  | Math           |
+| `示`  | console        |
+| `録`  | log            |
+| `誤`  | error          |
+| `警`  | warn           |
+
+## Node.js/CommonJS
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `要`  | require        |
+| `組`  | module         |
+| `送`  | exports        |
+| `過`  | process        |
+| `全`  | global         |
+| `緩`  | Buffer         |
+| `遅`  | setTimeout     |
+
+## File System Operations
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `書`  | fs             |
+| `読`  | readFile       |
+| `保`  | writeFile      |
+| `創`  | mkdir          |
+| `状`  | stat           |
+| `道`  | path           |
+| `結`  | join           |
+
+## Web and HTTP
+
+| Kanji | JavaScript Term |
+|-------|----------------|
+| `網`  | http           |
+| `求`  | request        |
+| `答`  | response       |
+| `供`  | server         |
+| `客`  | client         |
+| `路`  | router         |
+| `経`  | route          |
+| `取`  | get            |
+| `送`  | post           |
+| `置`  | put            |
+| `消`  | delete         |

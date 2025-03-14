@@ -1,0 +1,159 @@
+# Semantic-Kanji System: Translation Examples and Usage
+
+## Complete Examples
+
+### Example 1: Web Scraper
+
+**Semantic-Kanji:**
+```
+定 送信=要('送信');定 解析=要('解析');定 書=要('書');
+웎.웏(scrapeAndSave,url,filename,textContent,'body',cleanedText)
+定 websiteUrl='https://example.com';定 outputFilename='output.txt';
+scrapeAndSave(websiteUrl,outputFilename);
+```
+
+**Standard JavaScript:**
+```javascript
+const axios = require('axios');
+const cheerio = require('cheerio');
+const fs = require('fs');
+
+async function scrapeAndSave(url, filename) {
+  try {
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
+    const textContent = $('body').text();
+    const cleanedText = textContent.replace(/\s+/g, ' ').trim();
+    fs.writeFileSync(filename, cleanedText);
+    console.log(`Content saved to ${filename}`);
+  } catch (error) {
+    console.error('Error fetching the page:', error.message);
+  }
+}
+
+const websiteUrl = 'https://example.com';
+const outputFilename = 'output.txt';
+scrapeAndSave(websiteUrl, outputFilename);
+```
+
+### Example 2: Express API
+
+**Semantic-Kanji:**
+```
+定 速=要('速');定 獏=要('獏');定 道=要('道');
+웒(速,応,5000)
+Ⴞ(獏,'mongodb://localhost/myapp')
+응.用(速.json());
+웓.웃(応,'/api/data',定 資=待 庫.探(),資)
+```
+
+**Standard JavaScript:**
+```javascript
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+
+const app = express();
+const PORT = 5000;
+
+app.use(express.json());
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/myapp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Define route
+app.get('/api/data', async (req, res) => {
+  try {
+    const data = await DB.find();
+    return res.status(200).json(data);
+  } catch (error) {
+    console.error('Error:', error.message);
+    return res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+### Example 3: Data Processing
+
+**Semantic-Kanji:**
+```
+定 processData = ༽(data, item => {
+  定 transformed = {};
+  transformed.id = item.id;
+  transformed.名 = item.名.整();
+  transformed.値 = 数(item.値);
+  条(item.状態 === '有効') {
+    transformed.active = 真;
+  } 他 {
+    transformed.active = 偽;
+  }
+  返 transformed;
+});
+
+定 filteredData = ༻(data, options, item => {
+  条(!options.showInactive && !item.active) {
+    返 偽;
+  }
+  条(options.minValue && item.値 < options.minValue) {
+    返 偽;
+  }
+  返 真;
+});
+```
+
+**Standard JavaScript:**
+```javascript
+const processData = function(data) {
+  return data.map(item => {
+    const transformed = {};
+    transformed.id = item.id;
+    transformed.name = item.name.trim();
+    transformed.value = Number(item.value);
+    if (item.status === 'active') {
+      transformed.active = true;
+    } else {
+      transformed.active = false;
+    }
+    return transformed;
+  });
+};
+
+const filteredData = function(data, options) {
+  return data.filter(item => {
+    if (!options.showInactive && !item.active) {
+      return false;
+    }
+    if (options.minValue && item.value < options.minValue) {
+      return false;
+    }
+    return true;
+  });
+};
+```
+
+## Translation Tips
+
+1. **Start with semantic patterns** - First identify and expand the high-level pattern symbols, as they represent entire code blocks
+2. **Then translate Kanji characters** - Replace individual Kanji characters with their JavaScript equivalents
+3. **Look for parameter relationships** - Pay attention to how parameters are used within each semantic pattern
+4. **Watch for nesting** - Semantic patterns can be nested within each other
+5. **Preserve original variable names** - Don't change variable names unless they're part of the translation pattern
+
+## Response Format
+
+When responding to the user after translating their Semantic-Kanji code:
+
+1. First show the translated JavaScript code in a code block
+2. Then answer their question about the code
+3. Keep the original variable names, logic, and structure intact
+4. If you need to suggest changes or improvements, clearly distinguish those from the translated code

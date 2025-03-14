@@ -1,0 +1,137 @@
+# Semantic-Kanji System: Pattern Dictionary
+
+## Web Operations Patterns
+
+- `웃(fn, url)` → HTTP GET request function
+  ```javascript
+  async function fn(url) {
+    try {
+      const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
+  }
+  ```
+
+- `웋(fn, url, data)` → HTTP POST request function
+  ```javascript
+  async function fn(url, data) {
+    try {
+      const response = await axios.post(url, data);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
+  }
+  ```
+
+- `웎(fn, url)` → Web scraping setup
+  ```javascript
+  async function fn(url) {
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
+    return $;
+  }
+  ```
+
+- `웎.웏(fn, url, filename, content, selector, cleaned)` → Web scraping with file save
+  ```javascript
+  async function fn(url, filename) {
+    try {
+      const { data } = await axios.get(url);
+      const $ = cheerio.load(data);
+      const content = $(selector).text();
+      const cleaned = content.replace(/\s+/g, ' ').trim();
+      fs.writeFileSync(filename, cleaned);
+      console.log(`Content saved to ${filename}`);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  }
+  ```
+
+## Express/Server Patterns
+
+- `웒(express, app, port)` → Express server setup
+  ```javascript
+  const express = require('express');
+  const app = express();
+  const PORT = port || 3000;
+  
+  app.use(express.json());
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+  ```
+
+- `웓.웃(app, route, logic, result)` → Express GET route handler
+  ```javascript
+  app.get(route, async (req, res) => {
+    try {
+      logic
+      return res.status(200).json(result);
+    } catch (error) {
+      console.error('Error:', error.message);
+      return res.status(500).json({ error: 'Server error' });
+    }
+  });
+  ```
+
+- `웓.웋(app, route, params, logic, result)` → Express POST route handler
+  ```javascript
+  app.post(route, async (req, res) => {
+    try {
+      const { params } = req.body;
+      logic
+      return res.status(201).json(result);
+    } catch (error) {
+      console.error('Error:', error.message);
+      return res.status(500).json({ error: 'Server error' });
+    }
+  });
+  ```
+
+## Database Patterns
+
+- `Ⴚ(fn, query, result, model, sort)` → Database find operation
+  ```javascript
+  async function fn(query) {
+    try {
+      const result = await model.find(query)sort;
+      return result;
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
+  }
+  ```
+
+- `Ⴛ(fn, data, instance, model)` → Database create operation
+  ```javascript
+  async function fn(data) {
+    try {
+      const instance = new model(data);
+      await instance.save();
+      return instance;
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw error;
+    }
+  }
+  ```
+
+- `Ⴞ(mongoose, uri)` → MongoDB connection
+  ```javascript
+  const mongoose = require('mongoose');
+  
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+  ```

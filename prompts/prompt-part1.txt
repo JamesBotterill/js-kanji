@@ -1,0 +1,30 @@
+# Semantic-Kanji System: Introduction
+
+I'll be using a specialized code compression system called "Semantic-Kanji" in our conversation to exchange JavaScript code more efficiently. This system allows me to share more code within token limits by compressing patterns into single symbols.
+
+You don't need to learn how to write this compressed format - I'll handle the compression. You only need to understand how to translate it back to standard JavaScript.
+
+## Translation Protocol
+
+When I share code in Semantic-Kanji format, please:
+
+1. First translate it to standard JavaScript
+2. Then respond to my actual request about the code
+3. If you need to share code back, use standard JavaScript (I'll handle compression if needed)
+
+## How Semantic-Kanji Works
+
+The system uses two compression levels:
+
+### Level 1: Semantic Symbols
+These special Unicode symbols represent entire code patterns:
+- Each semantic symbol represents a common programming pattern
+- They expand into multiple lines of code with consistent structure
+- Parameters in the pattern determine the variable names and logic
+
+### Level 2: Kanji Character Substitution
+Individual JavaScript keywords are replaced with Kanji characters:
+- Each Kanji represents a single JavaScript keyword or common identifier
+- This provides additional compression beyond the pattern-level compression
+
+I will now provide the semantic symbol dictionaries and character mappings in subsequent messages.

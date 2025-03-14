@@ -1,0 +1,129 @@
+/**
+ * Semantic symbol dictionary for high-level pattern compression
+ * 
+ * This dictionary maps semantic programming concepts to single multi-byte
+ * Unicode symbols. Each symbol represents an entire programming pattern
+ * or intent, offering much higher compression than character substitution.
+ */
+
+module.exports = {
+  // Web operations
+  '웃': 'HTTP_GET',           // HTTP GET request pattern
+  '웋': 'HTTP_POST',          // HTTP POST request pattern
+  '웍': 'HTTP_CRUD',          // Complete CRUD operation set
+  '웎': 'WEB_SCRAPE',         // Web scraping pattern
+  '웏': 'FILE_SAVE',          // Save to file pattern
+  '웑': 'API_REQUEST',        // Generic API request
+  '웒': 'SERVER_START',       // Start server pattern
+  '웓': 'ROUTE_HANDLER',      // Express route handler
+  '월': 'AUTH_CHECK',         // Authentication check
+  '웕': 'VALIDATE_INPUT',     // Input validation pattern
+  
+  // Data processing
+  '༺': 'DATA_TRANSFORM',     // Data transformation pattern
+  '༻': 'DATA_FILTER',        // Data filtering pattern
+  '༼': 'DATA_REDUCE',        // Data reduction/aggregation
+  '༽': 'DATA_MAP',           // Mapping over data
+  '༾': 'DATA_EXTRACT',       // Data extraction pattern
+  '༿': 'DATA_CLEAN',         // Data cleaning operations
+  'ཀ': 'DATA_SORT',          // Data sorting pattern
+  'ཁ': 'DATA_GROUP',         // Data grouping pattern
+  'ག': 'DATA_JOIN',          // Data joining/merging pattern
+  'ང': 'DATA_SPLIT',         // Data splitting pattern
+  
+  // Database operations
+  'Ⴚ': 'DB_FIND',            // Database find operation
+  'Ⴛ': 'DB_CREATE',          // Database create operation
+  'Ⴜ': 'DB_UPDATE',          // Database update operation
+  'Ⴝ': 'DB_DELETE',          // Database delete operation
+  'Ⴞ': 'DB_CONNECT',         // Database connection pattern
+  'Ⴟ': 'DB_QUERY',           // Database query pattern
+  'Ⴠ': 'DB_SCHEMA',          // Database schema definition
+  'Ⴡ': 'DB_MODEL',           // Database model definition
+  'Ⴢ': 'DB_INDEX',           // Database indexing pattern
+  'Ⴣ': 'DB_AGGREGATE',       // Database aggregation operation
+  
+  // Error handling
+  'ᕮ': 'ERROR_TRY_CATCH',    // Standard try-catch pattern
+  'ᕯ': 'ERROR_VALIDATE',     // Validation with error handling
+  'ᕰ': 'ERROR_ASYNC',        // Async error handling pattern
+  'ᕱ': 'ERROR_BOUNDARY',     // Error boundary pattern
+  'ᕲ': 'ERROR_LOG',          // Error logging pattern
+  'ᕳ': 'ERROR_RETRY',        // Retry on error pattern
+  'ᕴ': 'ERROR_FALLBACK',     // Fallback on error pattern
+  'ᕵ': 'ERROR_THROW',        // Custom error throwing pattern
+  'ᕶ': 'ERROR_ASSERT',       // Assertion with error handling
+  'ᕷ': 'ERROR_CHAIN',        // Error chaining pattern
+  
+  // Async patterns
+  'ꬉ': 'ASYNC_WATERFALL',    // Sequential async execution
+  'ꬊ': 'ASYNC_PARALLEL',     // Parallel async execution
+  'ꬋ': 'ASYNC_RACE',         // Racing async operations
+  'ꬌ': 'ASYNC_RETRY',        // Retry async operation pattern
+  'ꬍ': 'ASYNC_DEBOUNCE',     // Debounce async pattern
+  'ꬎ': 'ASYNC_THROTTLE',     // Throttle async pattern
+  '꬏': 'ASYNC_QUEUE',        // Async queue pattern
+  '꬐': 'ASYNC_CACHE',        // Async caching pattern
+  'ꬑ': 'ASYNC_TIMEOUT',      // Async timeout pattern
+  'ꬒ': 'ASYNC_CANCEL',       // Cancelable async pattern
+  
+  // File operations
+  'ꙮ': 'FILE_READ',          // File reading pattern
+  '꙯': 'FILE_WRITE',         // File writing pattern
+  '꙰': 'FILE_APPEND',        // File append pattern
+  '꙱': 'FILE_DELETE',        // File deletion pattern
+  '꙲': 'FILE_COPY',          // File copy pattern
+  '꙳': 'FILE_MOVE',          // File move pattern
+  'ꙴ': 'FILE_STAT',          // File stats pattern
+  'ꙵ': 'FILE_WATCH',         // File watching pattern
+  'ꙶ': 'FILE_STREAM',        // File streaming pattern
+  'ꙷ': 'FILE_TRANSFORM',     // File transformation pattern
+  
+  // String operations
+  'ꩻ': 'STRING_FORMAT',      // String formatting pattern (using Cham letter)
+  'ꩼ': 'STRING_PARSE',       // String parsing pattern (using Cham letter)
+  'ꩽ': 'STRING_VALIDATE',    // String validation pattern (using Cham letter)
+  'ꩾ': 'STRING_TRANSFORM',   // String transformation pattern (using Cham letter)
+  'ꩿ': 'STRING_TEMPLATE',    // String templating pattern (using Cham letter)
+  'ꪀ': 'STRING_SANITIZE',    // String sanitization pattern (using Tai Viet letter)
+  'ꪁ': 'STRING_MATCH',       // String matching pattern (using Tai Viet letter)
+  'ꪂ': 'STRING_EXTRACT',     // String extraction pattern (using Tai Viet letter)
+  'ꪃ': 'STRING_REPLACE',     // String replacement pattern (using Tai Viet letter)
+  'ꪄ': 'STRING_SPLIT',       // String splitting pattern (using Tai Viet letter)
+  
+  // Object/array operations
+  'ꯓ': 'OBJECT_MERGE',       // Object merging pattern
+  'ꯔ': 'OBJECT_PICK',        // Object property picking
+  'ꯕ': 'OBJECT_OMIT',        // Object property omission
+  'ꯖ': 'OBJECT_DEEP_CLONE',  // Deep cloning pattern
+  'ꯗ': 'OBJECT_TRANSFORM',   // Object transformation
+  'ꯘ': 'ARRAY_CHUNK',        // Array chunking pattern
+  'ꯙ': 'ARRAY_UNIQUE',       // Array deduplication
+  'ꯚ': 'ARRAY_FLATTEN',      // Array flattening pattern
+  'ꯛ': 'ARRAY_PAGINATE',     // Array pagination pattern
+  'ꯜ': 'ARRAY_SORT',         // Array custom sorting
+  
+  // Authentication patterns
+  'ꮚ': 'AUTH_LOGIN',         // Login authentication
+  'ꮛ': 'AUTH_REGISTER',      // User registration
+  'ꮜ': 'AUTH_LOGOUT',        // Logout pattern
+  'ꮝ': 'AUTH_PASSWORD',      // Password handling
+  'ꮞ': 'AUTH_TOKEN',         // Token handling
+  'ꮟ': 'AUTH_SESSION',       // Session handling
+  'ꮠ': 'AUTH_PERMISSIONS',   // Permission checking
+  'ꮡ': 'AUTH_OAUTH',         // OAuth pattern
+  'ꮢ': 'AUTH_2FA',           // Two-factor authentication
+  'ꮣ': 'AUTH_RESET',         // Password reset
+  
+  // Meta-programming patterns
+  'ꩰ': 'META_CURRY',         // Function currying (using Cham letter)
+  'ꩱ': 'META_COMPOSE',       // Function composition (using Cham letter)
+  'ꩲ': 'META_MEMOIZE',       // Function memoization (using Cham letter)
+  'ꩳ': 'META_PROXY',         // Object proxying (using Cham letter)
+  'ꩴ': 'META_REFLECT',       // Reflection pattern (using Cham letter)
+  'ꩵ': 'META_DECORATOR',     // Decorator pattern (using Cham letter)
+  'ꩶ': 'META_FACTORY',       // Factory pattern (using Cham letter)
+  '꩷': 'META_SINGLETON',     // Singleton pattern (using Cham letter)
+  '꩸': 'META_OBSERVER',      // Observer pattern (using Cham letter)
+  '꩹': 'META_BUILDER'        // Builder pattern (using Cham letter)
+};

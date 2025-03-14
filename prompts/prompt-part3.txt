@@ -1,0 +1,154 @@
+# Semantic-Kanji System: More Pattern Dictionary
+
+## Data Operation Patterns
+
+- `༽(fn, data, item, logic, result)` → Array mapping function
+  ```javascript
+  function fn(data) {
+    return data.map(item => {
+      logic
+      return result;
+    });
+  }
+  ```
+
+- `༻(fn, data, query, item, logic, condition)` → Array filtering function
+  ```javascript
+  function fn(data, query) {
+    return data.filter(item => {
+      logic
+      return condition;
+    });
+  }
+  ```
+
+- `༼(fn, data, initial, acc, item, logic, result)` → Array reduction function
+  ```javascript
+  function fn(data, initial) {
+    return data.reduce((acc, item) => {
+      logic
+      return result;
+    }, initial);
+  }
+  ```
+
+- `༿(fn, data)` → Data cleaning operations
+  ```javascript
+  function fn(data) {
+    return data
+      .filter(item => item !== null && item !== undefined)
+      .map(item => typeof item === 'string' ? item.trim() : item);
+  }
+  ```
+
+## Error Handling Patterns
+
+- `ᕮ(fn, args, logic, result, errType, handler)` → Try-catch wrapper function
+  ```javascript
+  async function fn(args) {
+    try {
+      logic
+      return result;
+    } catch (error) {
+      console.error(errType, error.message);
+      handler
+    }
+  }
+  ```
+
+- `ᕯ(fn, input, errMsg1, type, errMsg2, logic, result)` → Input validation with error handling
+  ```javascript
+  function fn(input) {
+    if (!input) {
+      throw new Error(errMsg1);
+    }
+    if (typeof input !== type) {
+      throw new Error(errMsg2);
+    }
+    logic
+    return result;
+  }
+  ```
+
+- `ᕲ(err, context)` → Error logging pattern
+  ```javascript
+  console.error(`${context}:`, err.message);
+  if (process.env.NODE_ENV === 'development') {
+    console.error(err.stack);
+  }
+  ```
+
+## Authentication Patterns
+
+- `월(middleware, headerName, noTokenMsg, secret, userProp, invalidTokenMsg)` → JWT verification middleware
+  ```javascript
+  function middleware(req, res, next) {
+    const token = req.header(headerName);
+    if (!token) {
+      return res.status(401).json({ msg: noTokenMsg });
+    }
+    try {
+      const decoded = jwt.verify(token, secret);
+      req[userProp] = decoded[userProp];
+      next();
+    } catch (err) {
+      res.status(401).json({ msg: invalidTokenMsg });
+    }
+  }
+  ```
+
+- `ꮚ(fn, userField, pwField, user, model, invalidUserMsg, invalidPwMsg, payloadField, secret, expiresIn, errorContextMsg, serverErrorMsg)` → Login with JWT
+  ```javascript
+  async function fn(req, res) {
+    const { userField, pwField } = req.body;
+    try {
+      let user = await model.findOne({ [userField]: userField });
+      if (!user) {
+        return res.status(400).json({ msg: invalidUserMsg });
+      }
+      const isMatch = await bcrypt.compare(pwField, user[pwField]);
+      if (!isMatch) {
+        return res.status(400).json({ msg: invalidPwMsg });
+      }
+      const payload = {
+        [payloadField]: user.id
+      };
+      jwt.sign(payload, secret, { expiresIn }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
+    } catch (err) {
+      console.error(errorContextMsg, err.message);
+      res.status(500).send(serverErrorMsg);
+    }
+  }
+  ```
+
+## File Operation Patterns
+
+- `ꙮ(fn, filename)` → File reading pattern
+  ```javascript
+  function fn(filename) {
+    try {
+      const data = fs.readFileSync(filename, 'utf8');
+      return data;
+    } catch (error) {
+      console.error('Error reading file:', error.message);
+      throw error;
+    }
+  }
+  ```
+
+- `웏(fn, filename, data)` → File writing pattern
+  ```javascript
+  function fn(filename, data) {
+    try {
+      fs.writeFileSync(filename, data);
+      console.log(`Data saved to ${filename}`);
+      return true;
+    } catch (error) {
+      console.error('Error writing file:', error.message);
+      return false;
+    }
+  }
+  ```
