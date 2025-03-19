@@ -20,7 +20,7 @@ const VERSION = packageJson.version;
 // Setup CLI program
 program
   .name('js-kanji')
-  .description('Ultra-efficient JavaScript compression for LLM communication')
+  .description('Ultra-efficient JavaScript compression using Semantic-Kanji')
   .version(VERSION);
 
 // Compress command
@@ -28,7 +28,7 @@ program
   .command('compress <file>')
   .description('Compress JavaScript code')
   .option('-o, --output <file>', 'Output file (defaults to input.min.js)')
-  .option('-m, --method <method>', 'Compression method (mini, kanji, semantic-kanji)', 'semantic-kanji')
+  .option('-m, --method <method>', 'Compression method (kanji, semantic-kanji)', 'semantic-kanji')
   .option('-p, --print', 'Print the compressed code to console')
   .option('-s, --stats', 'Show compression statistics', true)
   .action((file, options) => {
@@ -72,9 +72,9 @@ program
 // Decompress command
 program
   .command('decompress <file>')
-  .description('Decompress JS-Kanji code')
+  .description('Decompress Kanji-compressed code')
   .option('-o, --output <file>', 'Output file (defaults to input.expanded.js)')
-  .option('-m, --method <method>', 'Decompression method (mini, kanji, semantic-kanji, auto)', 'auto')
+  .option('-m, --method <method>', 'Decompression method (kanji, semantic-kanji, auto)', 'auto')
   .option('-p, --print', 'Print the decompressed code to console')
   .action((file, options) => {
     try {
@@ -135,25 +135,19 @@ program
       // Write output files if prefix is provided
       if (options.output) {
         const outputPrefix = options.output;
-        const miniFile = `${outputPrefix}.mini.js`;
         const kanjiFile = `${outputPrefix}.kanji.js`;
         const semanticFile = `${outputPrefix}.semantic.js`;
         
-        fs.writeFileSync(miniFile, comparison.mini.code);
         fs.writeFileSync(kanjiFile, comparison.kanji.code);
         fs.writeFileSync(semanticFile, comparison.semantic.code);
         
         console.log(chalk.green(`\nOutput files written to:`));
-        console.log(`- JS-Mini: ${miniFile}`);
         console.log(`- JS-Kanji: ${kanjiFile}`);
         console.log(`- Semantic-Kanji: ${semanticFile}`);
       }
       
       // Print code if requested
       if (options.print) {
-        console.log('\nJS-Mini:');
-        console.log(chalk.cyan(comparison.mini.code));
-        
         console.log('\nJS-Kanji:');
         console.log(chalk.cyan(comparison.kanji.code));
         
@@ -224,15 +218,13 @@ function getDefaultOutputName(inputFile, method) {
   const dir = path.dirname(inputFile);
   
   switch (method) {
-    case 'mini':
-      return path.join(dir, `${base}.mini${ext}`);
     case 'kanji':
       return path.join(dir, `${base}.kanji${ext}`);
     case 'semantic-kanji':
     case 'semantic':
       return path.join(dir, `${base}.semantic${ext}`);
     default:
-      return path.join(dir, `${base}.min${ext}`);
+      return path.join(dir, `${base}.compressed${ext}`);
   }
 }
 
@@ -250,11 +242,7 @@ function displayComparison(comparison) {
   console.log(chalk.cyan('\nCompression Comparison:'));
   console.log(`Original code: ${comparison.original.chars} characters, ~${comparison.original.tokens} tokens\n`);
   
-  console.log('JS-Mini:');
-  console.log(`- ${comparison.mini.chars} characters, ~${comparison.mini.tokens} tokens`);
-  console.log(`- Token reduction: ${comparison.mini.reduction} (${comparison.mini.savingsPercent}% savings)`);
-  
-  console.log('\nJS-Kanji:');
+  console.log('JS-Kanji:');
   console.log(`- ${comparison.kanji.chars} characters, ~${comparison.kanji.tokens} tokens`);
   console.log(`- Token reduction: ${comparison.kanji.reduction} (${comparison.kanji.savingsPercent}% savings)`);
   
@@ -264,7 +252,6 @@ function displayComparison(comparison) {
   
   // Determine the best method
   const methods = [
-    { name: 'JS-Mini', savings: comparison.mini.savingsPercent },
     { name: 'JS-Kanji', savings: comparison.kanji.savingsPercent },
     { name: 'Semantic-Kanji', savings: comparison.semantic.savingsPercent }
   ];

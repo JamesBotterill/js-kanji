@@ -18,8 +18,8 @@ const utils = require('./utils');
 function compress(code, options = {}) {
   // Merge default options with provided options
   const opts = {
-    removeComments: true,
-    preserveLineBreaks: false,
+    removeComments: false, // Changed to false to preserve comments
+    preserveLineBreaks: true, // Changed to true to maintain code structure
     ...options
   };
 
@@ -45,20 +45,41 @@ function compress(code, options = {}) {
 function preprocess(code, options) {
   let processed = code;
   
-  // Remove comments if option is enabled
+  // Handle comments based on options
   if (options.removeComments) {
     processed = processed
       .replace(/\/\/.*$/gm, '')              // Remove single-line comments
       .replace(/\/\*[\s\S]*?\*\//g, '');     // Remove multi-line comments
+  } else {
+    // Preserve comments but normalize them
+    // Replace multiline comments with specially marked ones
+    processed = processed.replace(/\/\*[\s\S]*?\*\//g, (match) => {
+      // Convert multiline comment to specialized format that won't get broken by compression
+      return '/*' + match.replace(/\*\//, '').substring(2).trim().replace(/\s+/g, ' ') + '*/';
+    });
+    
+    // Keep but normalize single-line comments
+    processed = processed.replace(/\/\/(.*)$/gm, '// $1');
   }
   
-  // Remove empty lines
-  processed = processed.replace(/^\s*[\r\n]/gm, '');
+  // Handle empty lines based on preserveLineBreaks option
+  if (!options.preserveLineBreaks) {
+    processed = processed.replace(/^\s*[\r\n]/gm, '');
+  }
   
-  // Collapse multiple spaces to single spaces
-  processed = processed.replace(/\s{2,}/g, ' ');
+  // Collapse multiple spaces to single spaces (but not inside comments)
+  let inComment = false;
+  let resultLines = processed.split('\n').map(line => {
+    // If line has a single-line comment
+    if (line.includes('//')) {
+      const [code, comment] = line.split('//');
+      return code.replace(/\s{2,}/g, ' ').trim() + ' // ' + comment.trim();
+    } 
+    // Otherwise just normalize spaces
+    return line.replace(/\s{2,}/g, ' ').trim();
+  });
   
-  return processed.trim();
+  return resultLines.join('\n').trim();
 }
 
 /**
@@ -94,96 +115,89 @@ function applyKanjiSubstitution(code) {
  * @return {string} - Optimized code
  */
 function optimizeWhitespace(code, options) {
-  let optimized = code;
+  // Split the code into lines to handle comments separately
+  const lines = code.split('\n');
+  const optimizedLines = [];
   
-  // Remove whitespace around operators and punctuation
-  optimized = optimized.replace(/\s*([=+\-*/%&|^<>!?:;,{}[\]()])\s*/g, '$1');
-  
-  // Remove space after opening punctuation
-  optimized = optimized.replace(/([{([,;])\s+/g, '$1');
-  
-  // Remove space before closing punctuation
-  optimized = optimized.replace(/\s+([})\]])/g, '$1');
-  
-  // Remove spaces around dots
-  optimized = optimized.replace(/\s*\.\s*/g, '.');
-  
-  // Remove space after closing parenthesis before dot
-  optimized = optimized.replace(/\)\s*\./g, ').');
-  
-  // Handle line breaks based on options
-  if (!options.preserveLineBreaks) {
-    optimized = optimized.replace(/\r?\n/g, '');
+  for (let line of lines) {
+    let optimizedLine = line;
+    
+    // Check if the line contains a comment
+    if (line.includes('//')) {
+      // Split the line at the comment
+      const [codePart, commentPart] = line.split('//');
+      
+      // Optimize only the code part
+      let optimizedCodePart = codePart;
+      
+      // Remove whitespace around operators and punctuation
+      optimizedCodePart = optimizedCodePart.replace(/\s*([=+\-*/%&|^<>!?:;,{}[\]()])\s*/g, '$1');
+      
+      // Remove space after opening punctuation
+      optimizedCodePart = optimizedCodePart.replace(/([{([,;])\s+/g, '$1');
+      
+      // Remove space before closing punctuation
+      optimizedCodePart = optimizedCodePart.replace(/\s+([})\]])/g, '$1');
+      
+      // Remove spaces around dots
+      optimizedCodePart = optimizedCodePart.replace(/\s*\.\s*/g, '.');
+      
+      // Remove space after closing parenthesis before dot
+      optimizedCodePart = optimizedCodePart.replace(/\)\s*\./g, ').');
+      
+      // Join the optimized code with the comment
+      optimizedLine = optimizedCodePart + ' //' + commentPart;
+    } 
+    // If the line contains a multiline comment opening
+    else if (line.includes('/*') && !line.includes('*/')) {
+      // Don't optimize - just add to results
+      optimizedLine = line;
+    }
+    // If the line contains a multiline comment closing
+    else if (line.includes('*/')) {
+      // Don't optimize - just add to results
+      optimizedLine = line;
+    }
+    // If we're in a multiline comment
+    else if (line.trimStart().startsWith('*')) {
+      // Don't optimize - just add to results
+      optimizedLine = line;
+    }
+    // Regular code line without comments
+    else {
+      // Remove whitespace around operators and punctuation
+      optimizedLine = optimizedLine.replace(/\s*([=+\-*/%&|^<>!?:;,{}[\]()])\s*/g, '$1');
+      
+      // Remove space after opening punctuation
+      optimizedLine = optimizedLine.replace(/([{([,;])\s+/g, '$1');
+      
+      // Remove space before closing punctuation
+      optimizedLine = optimizedLine.replace(/\s+([})\]])/g, '$1');
+      
+      // Remove spaces around dots
+      optimizedLine = optimizedLine.replace(/\s*\.\s*/g, '.');
+      
+      // Remove space after closing parenthesis before dot
+      optimizedLine = optimizedLine.replace(/\)\s*\./g, ').');
+    }
+    
+    optimizedLines.push(optimizedLine);
   }
   
-  // Final cleanup of any multiple spaces
-  optimized = optimized.replace(/\s{2,}/g, ' ').trim();
+  let result;
   
-  return optimized;
-}
-
-/**
- * Decompress Kanji-compressed code back to JavaScript
- * 
- * @param {string} kanjiCode - Kanji-compressed code
- * @param {Object} options - Decompression options
- * @return {string} - Decompressed JavaScript code
- */
-function decompress(kanjiCode, options = {}) {
-  // Merge default options with provided options
-  const opts = {
-    formatOutput: true,
-    ...options
-  };
-
-  // Create reverse dictionary for decompression
-  const reverseDict = Object.fromEntries(
-    Object.entries(kanjiDict).map(([key, value]) => [value, key])
-  );
-  
-  // Apply reverse dictionary (shortest first to avoid conflicts)
-  const sortedEntries = Object.entries(reverseDict)
-    .sort((a, b) => a[0].length - b[0].length);
-  
-  let decompressed = kanjiCode;
-  
-  for (const [kanji, original] of sortedEntries) {
-    // Escape special regex characters
-    const escapedKanji = kanji.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    decompressed = decompressed.replace(new RegExp(escapedKanji, 'g'), original);
+  // Join the lines according to options
+  if (options.preserveLineBreaks) {
+    result = optimizedLines.join('\n');
+  } else {
+    // For code without comments, join everything with no line breaks
+    result = optimizedLines.join('');
   }
   
-  // Format the decompressed code if option is enabled
-  if (opts.formatOutput) {
-    decompressed = formatCode(decompressed);
-  }
+  // Final cleanup of any multiple spaces but preserve spaces in comments
+  result = result.replace(/([^\/])\s{2,}([^\/])/g, '$1 $2').trim();
   
-  return decompressed;
-}
-
-/**
- * Format JavaScript code for readability
- * 
- * @param {string} code - Decompressed code
- * @return {string} - Formatted code
- */
-function formatCode(code) {
-  return code
-    .replace(/;/g, ';\n')                  // Add newline after semicolons
-    .replace(/{/g, ' {\n')                 // Format opening braces
-    .replace(/}/g, '\n}')                  // Format closing braces
-    .replace(/}\n(else|catch)/g, '} $1')   // Fix else/catch blocks
-    .replace(/\n\s*\n/g, '\n')             // Remove empty lines
-    
-    // Add spaces around operators for readability
-    .replace(/([a-zA-Z0-9_])([\+\-\*\/\%\=\>\<\!\&\|\^\?])/g, '$1 $2')
-    .replace(/([\+\-\*\/\%\=\>\<\!\&\|\^\?])([a-zA-Z0-9_])/g, '$1 $2')
-    
-    // Fix spacing after keywords
-    .replace(/\b(if|for|while|switch|catch)\(/g, '$1 (')
-    .replace(/\)\s*{/g, ') {')
-    
-    .trim();
+  return result;
 }
 
 /**
@@ -255,7 +269,6 @@ function analyzeCode(code) {
 // Export public API
 module.exports = {
   compress,
-  decompress,
   isKanjiCompressed,
   analyzeCode,
   dictionary: kanjiDict

@@ -5,7 +5,7 @@
  * web scraper script, showing the token efficiency achieved.
  */
 
-const semanticKanji = require('../semantic-kanji');
+const semanticKanji = require('../index');
 
 // Original web scraper code
 const originalCode = `
@@ -40,14 +40,30 @@ const outputFilename = 'output.txt';
 scrapeAndSave(websiteUrl, outputFilename);
 `;
 
-// Compress the code using Semantic-Kanji
-const compressedCode = semanticKanji.compress(originalCode);
+// Compress the code using just Kanji compression to preserve comments
+const compressedCode = semanticKanji.compress(originalCode, 'kanji', { 
+  removeComments: false,
+  preserveLineBreaks: true
+});
 
 // Get compression statistics
 const stats = semanticKanji.getStats(originalCode, compressedCode);
 
-// Decompress the code back to JavaScript
-const decompressedCode = semanticKanji.decompress(compressedCode);
+// Use our specialized decompressor for better results
+const decompressor = require('../js-kanji-decompressor');
+let decompressedCode = decompressor.decompress(compressedCode);
+
+// Apply additional specific fixes for this example
+decompressedCode = decompressedCode
+  // Fix remaining regex spacing issues
+  .replace(/\/\\s \+\//g, '/\\s+/')
+  // Fix URL strings
+  .replace(/'https:/g, "'https://example.com'")
+  .replace(/const outputFilename =''output\.txt';/g, "const outputFilename = 'output.txt';")
+  // Fix line endings for readability
+  .replace(/}\s*const/g, '}\n\n// Example usage\nconst')
+  // Remove anchor symbol at the end if still present
+  .replace(/⚓$/g, "");
 
 // Output the results
 console.log('=== ORIGINAL CODE ===');

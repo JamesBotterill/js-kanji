@@ -1,0 +1,123 @@
+# Semantic-Kanji System: React/Frontend Patterns
+
+## React Component Patterns
+
+- `⚛(name, props, state, stateSetter, initialValue, logic, className, content)` → React functional component with useState
+  ```javascript
+  function name({ props }) {
+    const [state, stateSetter] = useState(initialValue);
+    
+    logic
+    
+    return (
+      <div className="className">
+        content
+      </div>
+    );
+  }
+  ```
+
+- `⚛.⚙(effectCode, cleanupCode, dependencies)` → React useEffect hook
+  ```javascript
+  useEffect(() => {
+    effectCode
+    
+    return () => {
+      cleanupCode
+    };
+  }, [dependencies]);
+  ```
+
+- `⚛.◉(hookName, params, state, stateSetter, initialValue, effectCode, cleanupCode, dependencies, handler, handlerParams, handlerLogic, handlerDeps)` → React custom hook
+  ```javascript
+  function useHookName(params) {
+    const [state, stateSetter] = useState(initialValue);
+    
+    useEffect(() => {
+      effectCode
+      
+      return () => {
+        cleanupCode
+      };
+    }, [dependencies]);
+    
+    const handler = useCallback((handlerParams) => {
+      handlerLogic
+    }, [handlerDeps]);
+    
+    return { state, handler };
+  }
+  ```
+
+- `⚛.⚪(contextName, state, stateSetter, initialValue, setupLogic, additionalValues)` → React context provider pattern
+  ```javascript
+  const contextNameContext = createContext();
+
+  export function contextNameProvider({ children }) {
+    const [state, stateSetter] = useState(initialValue);
+    
+    setupLogic
+    
+    const value = {
+      state,
+      additionalValues
+    };
+    
+    return (
+      <contextNameContext.Provider value={value}>
+        {children}
+      </contextNameContext.Provider>
+    );
+  }
+
+  export function useContextName() {
+    const context = useContext(contextNameContext);
+    if (context === undefined) {
+      throw new Error('useContextName must be used within a contextNameProvider');
+    }
+    return context;
+  }
+  ```
+
+## Error Handling and Utility Patterns
+
+- `捕手()` → Express error handler middleware
+  ```javascript
+  function errorHandler(err, req, res, next) {
+    const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+    res.status(statusCode);
+    res.json({
+      message: err.message,
+      stack: process.env.NODE_ENV === 'production' ? null : err.stack
+    });
+  }
+  ```
+
+- `⏱()` → Debounce utility function
+  ```javascript
+  function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+  ```
+
+- `⏲()` → Throttle utility function
+  ```javascript
+  function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  }
+  ```

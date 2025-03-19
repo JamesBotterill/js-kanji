@@ -4,28 +4,31 @@
 
 const fs = require('fs');
 const path = require('path');
-const jsKanji = require('./js-kanji');
+const jsKanji = require('./js-kanji-compressor');
+const semanticKanji = require('./index');
 const utils = require('./utils');
 
 const USAGE = `
-JS-Compression: Token-efficient JavaScript compression for LLM communication
+JS-Compression: Efficient JavaScript compression using Kanji characters
 
 Usage:
-  node js-compress.js mini compress <input.js> [output.js]
-  node js-compress.js mini decompress <input.mini.js> [output.js]
-  node js-compress.js kanji compress <input.js> [output.js]
-  node js-compress.js kanji decompress <input.kanji.js> [output.js]
-  node js-compress.js compare <input.js> [output-prefix]
+  node cli.js kanji compress <input.js> [output.js]
+  node cli.js kanji decompress <input.kanji.js> [output.js]
+  node cli.js semantic compress <input.js> [output.js]
+  node cli.js semantic decompress <input.semantic.js> [output.js]
+  node cli.js compare <input.js> [output-prefix]
+  node cli.js help                        Show this help message
   
 Options:
-  mini     Use JS-Mini (ASCII-based compression, more human-readable)
-  kanji    Use JS-Kanji (Kanji-based compression, maximum token efficiency)
-  compare  Compare both compression methods on the same file
+  kanji     Use JS-Kanji (basic Kanji-based compression)
+  semantic  Use Semantic-Kanji (enhanced semantic pattern compression)
+  compare   Compare both compression methods on the same file
+  help      Show this help message
   
 Examples:
-  node js-compress.js mini compress server.js server.mini.js
-  node js-compress.js kanji compress server.js server.kanji.js
-  node js-compress.js compare app.js
+  node cli.js kanji compress server.js server.kanji.js
+  node cli.js semantic compress server.js server.semantic.js
+  node cli.js compare app.js
 `;
 
 /**
@@ -35,26 +38,29 @@ Examples:
  */
 function runCLI(args = process.argv.slice(2)) {
   if (args.length < 1) {
-    console.log(USAGE);
+    process.stdout.write(USAGE + "\n");
     return;
   }
 
   const method = args[0];
   
-  if (method === 'compare') {
+  if (method === 'help' || method === '--help' || method === '-h') {
+    process.stdout.write(USAGE + "\n");
+    return;
+  } else if (method === 'compare') {
     handleCompare(args.slice(1));
-  } else if (['mini', 'kanji'].includes(method)) {
+  } else if (['kanji', 'semantic'].includes(method)) {
     handleCompression(method, args.slice(1));
   } else {
-    console.error(`Error: Unknown method '${method}'`);
-    console.log(USAGE);
+    process.stderr.write(`Error: Unknown method '${method}'\n`);
+    process.stdout.write(USAGE + "\n");
   }
 }
 
 /**
  * Handle compression/decompression operation
  * 
- * @param {string} method - Compression method ('mini' or 'kanji')
+ * @param {string} method - Compression method ('kanji' or 'semantic')
  * @param {string[]} args - Remaining command line arguments
  */
 function handleCompression(method, args) {
@@ -83,27 +89,31 @@ function handleCompression(method, args) {
   
   if (command === 'compress') {
     let compressed;
-    if (method === 'mini') {
-      compressed = jsMini.compress(code);
-    } else {
+    if (method === 'kanji') {
       compressed = jsKanji.compress(code);
+    } else { // semantic
+      compressed = semanticKanji.compress(code, 'semantic-kanji');
     }
     
-    const stats = utils.getCompressionStats(code, compressed, method === 'kanji');
+    const stats = utils.getCompressionStats(code, compressed, true);
     
     if (outputFile) {
       fs.writeFileSync(outputFile, compressed);
       console.log(`Compressed code written to: ${outputFile}`);
     }
     
-    console.log(utils.formatCompressionResult(stats, method));
+    console.log(`=== COMPRESSION STATISTICS ===`);
+    console.log(`- Original: ${stats.originalChars} characters, ~${stats.originalTokens} tokens`);
+    console.log(`- Compressed: ${stats.compressedChars} characters, ~${stats.compressedTokens} tokens`);
+    console.log(`- Character reduction: ${stats.charReduction} (${stats.compressionRatio}% of original)`);
+    console.log(`- Token reduction: ${stats.tokenReduction} tokens (${stats.tokenSavingsPercent}% savings)`);
     
   } else { // decompress
     let decompressed;
-    if (method === 'mini') {
-      decompressed = jsMini.decompress(code);
-    } else {
+    if (method === 'kanji') {
       decompressed = jsKanji.decompress(code);
+    } else { // semantic
+      decompressed = semanticKanji.decompress(code, 'semantic-kanji');
     }
     
     if (outputFile) {
@@ -139,48 +149,49 @@ function handleCompare(args) {
   const code = fs.readFileSync(inputFile, 'utf8');
   
   // Compare both compression methods
-  const miniCompressed = jsMini.compress(code);
   const kanjiCompressed = jsKanji.compress(code);
+  const semanticCompressed = semanticKanji.compress(code, 'semantic-kanji');
   
-  const miniStats = utils.getCompressionStats(code, miniCompressed, false);
+  const originalTokens = utils.estimateTokens(code, false);
   const kanjiStats = utils.getCompressionStats(code, kanjiCompressed, true);
+  const semanticStats = utils.getCompressionStats(code, semanticCompressed, true);
   
   console.log(`=== COMPRESSION COMPARISON: ${path.basename(inputFile)} ===\n`);
-  console.log(`Original code: ${miniStats.originalChars} chars, ~${miniStats.originalTokens} tokens\n`);
-  
-  console.log('JS-Mini (ASCII):');
-  console.log(`- ${miniStats.compressedChars} chars (${miniStats.compressionRatio}% of original)`);
-  console.log(`- ~${miniStats.compressedTokens} tokens (${miniStats.tokenSavingsPercent}% savings)`);
-  console.log(`- First 100 chars: ${miniCompressed.substring(0, 100)}...\n`);
+  console.log(`Original code: ${code.length} chars, ~${originalTokens} tokens\n`);
   
   console.log('JS-Kanji:');
   console.log(`- ${kanjiStats.compressedChars} chars (${kanjiStats.compressionRatio}% of original)`);
   console.log(`- ~${kanjiStats.compressedTokens} tokens (${kanjiStats.tokenSavingsPercent}% savings)`);
   console.log(`- First 100 chars: ${kanjiCompressed.substring(0, 100)}...\n`);
   
+  console.log('Semantic-Kanji:');
+  console.log(`- ${semanticStats.compressedChars} chars (${semanticStats.compressionRatio}% of original)`);
+  console.log(`- ~${semanticStats.compressedTokens} tokens (${semanticStats.tokenSavingsPercent}% savings)`);
+  console.log(`- First 100 chars: ${semanticCompressed.substring(0, 100)}...\n`);
+  
   // Calculate token efficiency comparison
-  const tokenDiff = miniStats.compressedTokens - kanjiStats.compressedTokens;
-  const efficiencyImprovement = Math.round((tokenDiff / miniStats.compressedTokens) * 100);
+  const tokenDiff = kanjiStats.compressedTokens - semanticStats.compressedTokens;
+  const efficiencyImprovement = Math.round((tokenDiff / kanjiStats.compressedTokens) * 100);
   
   console.log('COMPARISON RESULT:');
   if (tokenDiff > 0) {
-    console.log(`JS-Kanji saves ${tokenDiff} more tokens than JS-Mini (${efficiencyImprovement}% more efficient)`);
+    console.log(`Semantic-Kanji saves ${tokenDiff} more tokens than JS-Kanji (${efficiencyImprovement}% more efficient)`);
   } else if (tokenDiff < 0) {
-    console.log(`JS-Mini saves ${-tokenDiff} more tokens than JS-Kanji (${-efficiencyImprovement}% more efficient)`);
+    console.log(`JS-Kanji saves ${-tokenDiff} more tokens than Semantic-Kanji (${-efficiencyImprovement}% more efficient)`);
   } else {
     console.log('Both methods have identical token efficiency for this code');
   }
   
   // Write output files if requested
   if (outputPrefix) {
-    const miniOutput = `${outputPrefix}.mini.js`;
     const kanjiOutput = `${outputPrefix}.kanji.js`;
+    const semanticOutput = `${outputPrefix}.semantic.js`;
     
-    fs.writeFileSync(miniOutput, miniCompressed);
     fs.writeFileSync(kanjiOutput, kanjiCompressed);
+    fs.writeFileSync(semanticOutput, semanticCompressed);
     
-    console.log(`\nMini output written to: ${miniOutput}`);
-    console.log(`Kanji output written to: ${kanjiOutput}`);
+    console.log(`\nKanji output written to: ${kanjiOutput}`);
+    console.log(`Semantic output written to: ${semanticOutput}`);
   }
 }
 

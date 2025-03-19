@@ -8,7 +8,7 @@
 
 const semanticKanji = require('./semantic-kanji');
 const jsMini = require('./js-mini');
-const jsKanji = require('./js-kanji');
+const jsKanji = require('./js-kanji-compressor');
 const promptGenerator = require('./prompt-generator');
 const utils = require('./utils');
 

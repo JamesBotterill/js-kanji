@@ -36,15 +36,30 @@ function estimateTokens(text, isKanji = false) {
  * @return {Object} - Compression statistics
  */
 function getCompressionStats(original, compressed, isKanji = false) {
+  // Input validation
+  if (!original || typeof original !== 'string') {
+    throw new Error('Original code must be a non-empty string');
+  }
+  
+  if (!compressed || typeof compressed !== 'string') {
+    throw new Error('Compressed code must be a non-empty string');
+  }
+  
   const originalChars = original.length;
   const compressedChars = compressed.length;
   const charReduction = originalChars - compressedChars;
-  const compressionRatio = Math.round((compressedChars / originalChars) * 100);
+  
+  // Handle potential zero division
+  const compressionRatio = originalChars === 0 ? 0 : 
+    Math.round((compressedChars / originalChars) * 100);
   
   const originalTokens = estimateTokens(original, false);  // Original is ASCII only
   const compressedTokens = estimateTokens(compressed, isKanji);
   const tokenReduction = originalTokens - compressedTokens;
-  const tokenSavingsPercent = Math.round((tokenReduction / originalTokens) * 100);
+  
+  // Handle potential zero division or negative values
+  const tokenSavingsPercent = originalTokens === 0 ? 0 : 
+    Math.max(0, Math.round((tokenReduction / originalTokens) * 100));
   
   return {
     originalChars,

@@ -1,0 +1,135 @@
+# Semantic-Kanji System: Metaprogramming and String Patterns
+
+## Metaprogramming Patterns
+
+- `ꩰ(outerFn, outerArg, innerArg, logic, result)` → Function currying
+  ```javascript
+  function outerFn(outerArg) {
+    return function(innerArg) {
+      logic
+      return result;
+    };
+  }
+  ```
+
+- `ꩱ(fn, fns, x)` → Function composition
+  ```javascript
+  function fn(...fns) {
+    return function(x) {
+      return fns.reduceRight((acc, fn) => fn(acc), x);
+    };
+  }
+  ```
+
+- `ꩲ(wrapper, originalFn, arg)` → Function memoization
+  ```javascript
+  function wrapper(originalFn) {
+    const cache = {};
+    return function(arg) {
+      const key = JSON.stringify(arg);
+      if (cache[key]) {
+        return cache[key];
+      }
+      const result = originalFn(arg);
+      cache[key] = result;
+      return result;
+    };
+  }
+  ```
+
+- `ꩵ(decorator, target, key, descriptor)` → Decorator pattern
+  ```javascript
+  function decorator(target, key, descriptor) {
+    const original = descriptor.value;
+    descriptor.value = function(...args) {
+      console.log(`Calling ${key} with`, args);
+      const result = original.apply(this, args);
+      console.log(`${key} returned`, result);
+      return result;
+    };
+    return descriptor;
+  }
+  ```
+
+- `ꩶ(factoryName, config)` → Factory pattern
+  ```javascript
+  function factoryName(config) {
+    return {
+      create(type) {
+        if (!config[type]) {
+          throw new Error(`Unknown type: ${type}`);
+        }
+        return new config[type]();
+      }
+    };
+  }
+  ```
+
+## String Operation Patterns
+
+- `ꩻ(fn, arg1, arg2, prefix, middle, suffix)` → String formatting pattern
+  ```javascript
+  function fn(arg1, arg2) {
+    return `${prefix}${arg1}${middle}${arg2}${suffix}`;
+  }
+  ```
+
+- `ꩼ(fn, input, regex, pattern, match, group)` → String parsing with regex
+  ```javascript
+  function fn(input) {
+    const regex = new RegExp(pattern);
+    const match = regex.exec(input);
+    return match ? match[group] : null;
+  }
+  ```
+
+- `ꩽ(fn, input, regex, pattern)` → String validation pattern
+  ```javascript
+  function fn(input) {
+    const regex = new RegExp(pattern);
+    return regex.test(input);
+  }
+  ```
+
+- `ꩾ(fn, input, search, replace)` → String transformation pattern
+  ```javascript
+  function fn(input) {
+    return input
+      .replace(new RegExp(search, 'g'), replace)
+      .trim()
+      .toLowerCase();
+  }
+  ```
+
+- `ꩿ(fn, template, values)` → String templating pattern
+  ```javascript
+  function fn(template, values) {
+    return template.replace(/\${(\w+)}/g, (_, key) => {
+      return values[key] || '';
+    });
+  }
+  ```
+
+- `ꪀ(fn, input)` → String sanitization pattern
+  ```javascript
+  function fn(input) {
+    return input
+      .replace(/[<>]/g, '')
+      .replace(/[&]/g, '&amp;')
+      .replace(/["]/g, '&quot;')
+      .replace(/[']/g, '&#39;');
+  }
+  ```
+
+- `ꪁ(fn, text, pattern)` → String matching pattern
+  ```javascript
+  function fn(text, pattern) {
+    const regex = new RegExp(pattern, 'g');
+    const matches = [];
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      matches.push(match[0]);
+    }
+    return matches;
+  }
+  ```

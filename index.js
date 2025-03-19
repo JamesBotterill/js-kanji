@@ -1,33 +1,39 @@
 /**
- * Semantic-Kanji: Ultra-efficient JavaScript compression for LLM communication
+ * Semantic-Kanji: Ultra-efficient JavaScript compression for code sharing
  * 
  * This module provides a hybrid compression system that combines semantic pattern
- * recognition with character-level Kanji substitution to maximize token efficiency
- * when communicating JavaScript code with language models like Claude or GPT.
+ * recognition with character-level Kanji substitution to maximize efficiency
+ * when communicating JavaScript code.
  */
 
 const jsKanji = require('./js-kanji-compressor');
 const semanticKanji = require('./semantic-kanji');
 const utils = require('./utils');
 const prompt = require('./prompt-generator');
+const decompressor = require('./js-kanji-decompressor');
 
 /**
  * Compress JavaScript code using the specified method
  * 
  * @param {string} code - Original JavaScript code
- * @param {string} method - Compression method ('mini', 'kanji', or 'semantic-kanji')
+ * @param {string} method - Compression method ('kanji' or 'semantic-kanji')
  * @param {Object} options - Optional configuration options
  * @return {string} - Compressed code
  */
 function compress(code, method = 'semantic-kanji', options = {}) {
+  // Set default options that preserve comments and structure
+  const defaultOptions = {
+    removeComments: false,  // Preserve comments by default
+    preserveLineBreaks: true, // Preserve code structure by default
+    ...options
+  };
+  
   switch (method.toLowerCase()) {
-    case 'mini':
-      return jsMini.compress(code);
     case 'kanji':
-      return jsKanji.compress(code);
+      return jsKanji.compress(code, defaultOptions);
     case 'semantic-kanji':
     case 'semantic':
-      return semanticKanji.compress(code, options);
+      return semanticKanji.compress(code, defaultOptions);
     default:
       throw new Error(`Unknown compression method: ${method}`);
   }
@@ -37,28 +43,30 @@ function compress(code, method = 'semantic-kanji', options = {}) {
  * Decompress code back to readable JavaScript
  * 
  * @param {string} code - Compressed code
- * @param {string} method - Compression method used ('mini', 'kanji', or 'semantic-kanji')
+ * @param {string} method - Compression method used ('kanji' or 'semantic-kanji')
  * @param {Object} options - Optional configuration options
  * @return {string} - Decompressed JavaScript code
  */
-function decompress(code, method = 'semantic-kanji', options = {}) {
+function decompress(code, method = 'auto', options = {}) {
+  if (method === 'auto') {
+    // Auto-detect method based on content
+    if (containsKanji(code)) {
+      if (containsSemanticSymbols(code)) {
+        return semanticKanji.decompress(code, options);
+      }
+      return decompressor.decompress(code, options);
+    }
+    throw new Error('Unable to determine compression method');
+  }
+  
   switch (method.toLowerCase()) {
-    case 'mini':
-      return jsMini.decompress(code);
     case 'kanji':
-      return jsKanji.decompress(code);
+      return decompressor.decompress(code, options);
     case 'semantic-kanji':
     case 'semantic':
       return semanticKanji.decompress(code, options);
     default:
-      // Try to auto-detect method based on content
-      if (containsKanji(code)) {
-        if (containsSemanticSymbols(code)) {
-          return semanticKanji.decompress(code, options);
-        }
-        return jsKanji.decompress(code);
-      }
-      return jsMini.decompress(code);
+      throw new Error(`Unknown compression method: ${method}`);
   }
 }
 
@@ -93,42 +101,62 @@ function containsSemanticSymbols(text) {
  * @return {Object} - Comparison statistics
  */
 function compare(code, options = {}) {
-  const miniCompressed = jsMini.compress(code);
-  const kanjiCompressed = jsKanji.compress(code);
-  const semanticCompressed = semanticKanji.compress(code, options);
+  // Input validation
+  if (!code || typeof code !== 'string') {
+    throw new Error('Code must be a non-empty string');
+  }
   
-  const miniStats = utils.getCompressionStats(code, miniCompressed, false);
-  const kanjiStats = utils.getCompressionStats(code, kanjiCompressed, true);
-  const semanticStats = utils.getCompressionStats(code, semanticCompressed, true);
-  
-  return {
-    original: {
-      code: code,
-      chars: code.length,
-      tokens: miniStats.originalTokens
-    },
-    mini: {
-      code: miniCompressed,
-      chars: miniStats.compressedChars,
-      tokens: miniStats.compressedTokens,
-      reduction: miniStats.tokenReduction,
-      savingsPercent: miniStats.tokenSavingsPercent
-    },
-    kanji: {
-      code: kanjiCompressed,
-      chars: kanjiStats.compressedChars,
-      tokens: kanjiStats.compressedTokens,
-      reduction: kanjiStats.tokenReduction,
-      savingsPercent: kanjiStats.tokenSavingsPercent
-    },
-    semantic: {
-      code: semanticCompressed,
-      chars: semanticStats.compressedChars,
-      tokens: semanticStats.compressedTokens,
-      reduction: semanticStats.tokenReduction,
-      savingsPercent: semanticStats.tokenSavingsPercent
+  try {
+    // For semantic compression, ensure we're using proper pattern matching
+    const semanticOptions = {
+      ...options,
+      usePatternMatching: true // Ensure pattern matching is enabled for semantic compression
+    };
+    
+    // For kanji compression, we use the standard options
+    const kanjiCompressed = jsKanji.compress(code, options);
+    
+    // For semantic-kanji, explicitly specify the method and add pattern matching
+    const semanticCompressed = semanticKanji.compress(code, 'semantic-kanji', semanticOptions);
+    
+    const originalTokens = utils.estimateTokens(code, false);
+    const kanjiStats = utils.getCompressionStats(code, kanjiCompressed, true);
+    const semanticStats = utils.getCompressionStats(code, semanticCompressed, true);
+    
+    // Make sure we're properly comparing the two methods
+    if (semanticStats.tokenSavingsPercent < kanjiStats.tokenSavingsPercent) {
+      console.warn('Warning: Semantic compression is less efficient than Kanji compression. This may indicate an issue with pattern matching.');
     }
-  };
+    
+    // Determine which method had better compression
+    const bestMethod = kanjiStats.tokenSavingsPercent >= semanticStats.tokenSavingsPercent ? 
+      'kanji' : 'semantic';
+    
+    return {
+      original: {
+        code: code,
+        chars: code.length,
+        tokens: originalTokens
+      },
+      kanji: {
+        code: kanjiCompressed,
+        chars: kanjiStats.compressedChars,
+        tokens: kanjiStats.compressedTokens,
+        reduction: kanjiStats.tokenReduction,
+        savingsPercent: kanjiStats.tokenSavingsPercent
+      },
+      semantic: {
+        code: semanticCompressed,
+        chars: semanticStats.compressedChars,
+        tokens: semanticStats.compressedTokens,
+        reduction: semanticStats.tokenReduction,
+        savingsPercent: semanticStats.tokenSavingsPercent
+      },
+      bestMethod: bestMethod
+    };
+  } catch (error) {
+    throw new Error(`Comparison failed: ${error.message}`);
+  }
 }
 
 /**
@@ -174,7 +202,6 @@ module.exports = {
   generatePrompt,
   getStats,
   estimateTokens,
-  mini: jsMini,
   kanji: jsKanji,
   semantic: semanticKanji,
   utils
