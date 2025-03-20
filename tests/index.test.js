@@ -194,6 +194,17 @@ describe('Semantic-Kanji Core Functionality', () => {
   });
 });
 
+// Test containsKanji utility function
+describe('containsKanji Utility Function', () => {
+  test('Correctly identifies text containing Kanji', () => {
+    expect(semanticKanji.containsKanji('Hello world')).toBe(false);
+    expect(semanticKanji.containsKanji('こんにちは')).toBe(false); // Hiragana only
+    expect(semanticKanji.containsKanji('漢字')).toBe(true);
+    expect(semanticKanji.containsKanji('Hello 世界')).toBe(true); // Mixed with Kanji
+    expect(semanticKanji.containsKanji('こんにちは世界')).toBe(true); // Hiragana and Kanji
+  });
+});
+
 // Test edge cases and error handling
 describe('Edge Cases and Error Handling', () => {
   // Use the same normalizer as above

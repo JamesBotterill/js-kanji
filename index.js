@@ -208,6 +208,7 @@ module.exports = {
   generatePrompt,
   getStats,
   estimateTokens,
+  containsKanji,
   kanji: jsKanji,
   semantic: semanticKanji,
   utils

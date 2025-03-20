@@ -1,6 +1,6 @@
 {
   "name": "semantic-kanji-js",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Ultra-efficient JavaScript compression using Semantic-Kanji",
   "main": "index.js",
   "types": "index.d.ts",
