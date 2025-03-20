@@ -1,0 +1,850 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for semantic-patterns.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="index.html">All files</a> semantic-patterns.js</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Semantic patterns for high-level code compression
+ * 
+ * This dictionary maps common JavaScript code patterns to their semantic
+ * symbol representations. Patterns are organized by category and ordered
+ * from most specific to least specific within each category.
+ * 
+ * Each pattern includes placeholders ($1, $2, etc.) that will be preserved
+ * during compression. The patterns focus on high-token-reduction opportunities.
+ */
+&nbsp;
+module.exports = {
+  //==========================================================================
+  // WEB SCRAPING PATTERNS
+  //==========================================================================
+  
+  // Web scraping setup with axios and cheerio (full pattern)
+  "const $1 = require('axios');\nconst $2 = require('cheerio');\nconst $3 = require('fs');\nasync function $4($5, $6) {\n  try {\n    const { data } = await $1.get($5);\n    const $ = $2.load(data);\n    const $7 = $($8).text();\n    const $9 = $7.replace(/\\s+/g, ' ').trim();\n    $3.writeFileSync($6, $9);\n    console.log(`Content saved to ${$6}`);\n  } catch ($10) {\n    console.error('Error:', $10.message);\n  }\n}": 
+  "웎.웏($4, $5, $6, $7, $8, $9)",
+  
+  // Web scraping with extraction (no file saving)
+  "async function $1($2) {\n  try {\n    const { data } = await axios.get($2);\n    const $ = cheerio.load(data);\n    const $3 = $($4).text();\n    return $3;\n  } catch ($5) {\n    console.error('Error:', $5.message);\n    throw $5;\n  }\n}": 
+  "웎.ꪂ($1, $2, $3, $4)",
+  
+  // Simple GET request with error handling
+  "async function $1($2) {\n  try {\n    const response = await axios.get($2);\n    return response.data;\n  } catch ($3) {\n    console.error('Error:', $3.message);\n    throw $3;\n  }\n}": 
+  "웃($1, $2, $3)",
+  
+  // POST request with data and error handling
+  "async function $1($2, $3) {\n  try {\n    const response = await axios.post($2, $3);\n    return response.data;\n  } catch ($4) {\n    console.error('Error:', $4.message);\n    throw $4;\n  }\n}": 
+  "웋($1, $2, $3, $4)",
+  
+  // Complex web scraping with pagination
+  "async function $1($2, $3) {\n  const results = [];\n  let page = 1;\n  let hasMorePages = true;\n  \n  while (hasMorePages &amp;&amp; page &lt;= $3) {\n    try {\n      const url = `${$2}?page=${page}`;\n      const { data } = await axios.get(url);\n      const $ = cheerio.load(data);\n      \n      const pageItems = $('$4').map((_i, el) =&gt; {\n        const $item = $(el);\n        return {\n          $5: $item.find('$6').text().trim(),\n          $7: $item.find('$8').attr('$9')\n        };\n      }).get();\n      \n      results.push(...pageItems);\n      page++;\n      hasMorePages = pageItems.length &gt; 0;\n    } catch (error) {\n      console.error('Scraping error:', error.message);\n      break;\n    }\n  }\n  \n  return results;\n}":
+  "웎.页($1, $2, $3, '$4', '$5', '$6', '$7', '$8', '$9')",
+  
+  // Fetch with async/await and headers
+  "async function $1($2, $3) {\n  const options = {\n    method: 'GET',\n    headers: $3\n  };\n  \n  try {\n    const response = await fetch($2, options);\n    if (!response.ok) {\n      throw new Error(`HTTP error: ${response.status}`);\n    }\n    const data = await response.json();\n    return data;\n  } catch (error) {\n    console.error('Fetch error:', error.message);\n    throw error;\n  }\n}":
+  "獲函($1, $2, $3)",
+  
+  //==========================================================================
+  // EXPRESS/SERVER PATTERNS
+  //==========================================================================
+  
+  // Express server with middleware and routes setup
+  "const express = require('express');\nconst app = express();\nconst PORT = $1 || $2;\n\napp.use(express.json());\napp.use(express.urlencoded({ extended: false }));\n$3\napp.listen(PORT, () =&gt; {\n  console.log(`Server running on port ${PORT}`);\n});": 
+  "웒(express, app, $1, $2, $3)",
+  
+  // Express GET route handler with async/await
+  "app.get('$1', async (req, res) =&gt; {\n  try {\n    $2\n    return res.status(200).json($3);\n  } catch (error) {\n    console.error('$4:', error.message);\n    return res.status(500).json({ error: '$5' });\n  }\n});": 
+  "웓.웃(app, '$1', $2, $3, '$4', '$5')",
+  
+  // Express POST route handler with body extraction
+  "app.post('$1', async (req, res) =&gt; {\n  try {\n    const { $2 } = req.body;\n    $3\n    return res.status(201).json($4);\n  } catch (error) {\n    console.error('$5:', error.message);\n    return res.status(500).json({ error: '$6' });\n  }\n});": 
+  "웓.웋(app, '$1', $2, $3, $4, '$5', '$6')",
+  
+  // Express middleware function
+  "function $1(req, res, next) {\n  $2\n  next();\n}": 
+  "웓.中($1, $2)",
+  
+  // Express Router definition with multiple routes
+  "const express = require('express');\nconst router = express.Router();\n\n$1\n\nmodule.exports = router;":
+  "路由($1)",
+  
+  // Express controller pattern
+  "exports.$1 = async (req, res) =&gt; {\n  try {\n    $2\n    return res.status($3).json($4);\n  } catch (error) {\n    console.error('$5:', error.message);\n    return res.status(500).json({ error: error.message });\n  }\n}":
+  "控($1, $2, $3, $4, '$5')",
+  
+  // Express error handler middleware
+  "function errorHandler(err, req, res, next) {\n  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;\n  res.status(statusCode);\n  res.json({\n    message: err.message,\n    stack: process.env.NODE_ENV === 'production' ? null : err.stack\n  });\n}":
+  "捕手()",
+  
+  //==========================================================================
+  // DATABASE PATTERNS
+  //==========================================================================
+  
+  // MongoDB connection with error handling
+  "mongoose.connect('$1', {\n  useNewUrlParser: true,\n  useUnifiedTopology: true$2\n})\n.then(() =&gt; console.log('$3'))\n.catch(err =&gt; console.error('$4:', err));": 
+  "Ⴞ(mongoose, '$1', $2, '$3', '$4')",
+&nbsp;
+  // MongoDB schema and model definition
+  "const $1Schema = new mongoose.Schema({\n  $2: {\n    type: $3,\n    required: $4$5\n  },\n  $6: {\n    type: $7,\n    default: $8$9\n  }$10\n});\n\nconst $11 = mongoose.model('$12', $1Schema);": 
+  "Ⴠ.Ⴡ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, '$12')",
+  
+  // Database find operation with sorting and projection
+  "async function $1($2) {\n  try {\n    const $3 = await $4.find($2)$5;\n    return $3;\n  } catch (error) {\n    console.error('$6:', error.message);\n    throw error;\n  }\n}": 
+  "Ⴚ($1, $2, $3, $4, $5, '$6')",
+  
+  // Database create operation
+  "async function $1($2) {\n  try {\n    const $3 = new $4($2);\n    await $3.save();\n    return $3;\n  } catch (error) {\n    console.error('$5:', error.message);\n    throw error;\n  }\n}": 
+  "Ⴛ($1, $2, $3, $4, '$5')",
+  
+  // Database update operation
+  "async function $1($2, $3) {\n  try {\n    const $4 = await $5.findByIdAndUpdate($2, $3, { new: true });\n    if (!$4) {\n      throw new Error('$6');\n    }\n    return $4;\n  } catch (error) {\n    console.error('$7:', error.message);\n    throw error;\n  }\n}":
+  "㎋($1, $2, $3, $4, $5, '$6', '$7')",
+  
+  // Database delete operation
+  "async function $1($2) {\n  try {\n    const $3 = await $4.findByIdAndDelete($2);\n    if (!$3) {\n      throw new Error('$5');\n    }\n    return $3;\n  } catch (error) {\n    console.error('$6:', error.message);\n    throw error;\n  }\n}":
+  "㎌($1, $2, $3, $4, '$5', '$6')",
+  
+  // SQL query with parameterized query and connection pool
+  "async function $1($2) {\n  let connection;\n  try {\n    connection = await pool.getConnection();\n    const [rows] = await connection.execute('$3', $2);\n    return rows;\n  } catch (error) {\n    console.error('$4:', error.message);\n    throw error;\n  } finally {\n    if (connection) connection.release();\n  }\n}":
+  "㎐($1, $2, '$3', '$4')",
+  
+  //==========================================================================
+  // REACT/FRONTEND PATTERNS
+  //==========================================================================
+  
+  // React functional component with useState
+  "function $1({ $2 }) {\n  const [$3, set$4] = useState($5);\n  \n  $6\n  \n  return (\n    &lt;div className=\"$7\"&gt;\n      $8\n    &lt;/div&gt;\n  );\n}":
+  "⚛($1, $2, $3, $4, $5, $6, '$7', $8)",
+  
+  // React useEffect hook
+  "useEffect(() =&gt; {\n  $1\n  \n  return () =&gt; {\n    $2\n  };\n}, [$3]);":
+  "⚛.⚙($1, $2, $3)",
+  
+  // React custom hook
+  "function use$1($2) {\n  const [$3, set$4] = useState($5);\n  \n  useEffect(() =&gt; {\n    $6\n    \n    return () =&gt; {\n      $7\n    };\n  }, [$8]);\n  \n  const $9 = useCallback(($10) =&gt; {\n    $11\n  }, [$12]);\n  \n  return { $3, $9 };\n}":
+  "⚛.◉($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+  
+  // React context provider
+  "const $1Context = createContext();\n\nexport function $1Provider({ children }) {\n  const [$2, set$3] = useState($4);\n  \n  $5\n  \n  const value = {\n    $2,\n    $6\n  };\n  \n  return (\n    &lt;$1Context.Provider value={value}&gt;\n      {children}\n    &lt;/$1Context.Provider&gt;\n  );\n}\n\nexport function use$1() {\n  const context = useContext($1Context);\n  if (context === undefined) {\n    throw new Error('use$1 must be used within a $1Provider');\n  }\n  return context;\n}":
+  "⚛.⚪($1, $2, $3, $4, $5, $6)",
+  
+  //==========================================================================
+  // DATA TRANSFORMATION PATTERNS
+  //==========================================================================
+  
+  // Map transformation with detailed logic
+  "function $1($2) {\n  return $2.map($3 =&gt; {\n    $4\n    return $5;\n  });\n}": 
+  "༽($1, $2, $3, $4, $5)",
+  
+  // Filter operation with predicate function
+  "function $1($2, $3) {\n  return $2.filter($4 =&gt; {\n    $5\n    return $6;\n  });\n}": 
+  "༻($1, $2, $3, $4, $5, $6)",
+  
+  // Reduce operation with accumulator
+  "function $1($2, $3) {\n  return $2.reduce(($4, $5) =&gt; {\n    $6\n    return $7;\n  }, $3);\n}": 
+  "༼($1, $2, $3, $4, $5, $6, $7)",
+  
+  // Data cleaning and normalization
+  "function $1($2) {\n  return $2\n    .filter(item =&gt; item !== null &amp;&amp; item !== undefined)\n    .map(item =&gt; {\n      $3\n      return $4;\n    });\n}": 
+  "༿($1, $2, $3, $4)",
+  
+  // Complex data transformation pipeline
+  "function $1($2) {\n  return $2\n    .filter($3 =&gt; $4)\n    .map($5 =&gt; {\n      $6\n      return $7;\n    })\n    .reduce(($8, $9) =&gt; {\n      $10\n      return $11;\n    }, $12);\n}":
+  "⌁($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+  
+  // Group by operation
+  "function $1($2, $3) {\n  return $2.reduce(($4, $5) =&gt; {\n    const key = $5[$3];\n    if (!$4[key]) {\n      $4[key] = [];\n    }\n    $4[key].push($5);\n    return $4;\n  }, {});\n}":
+  "⩚($1, $2, $3, $4, $5)",
+  
+  // Array flattening with depth
+  "function $1($2, $3 = 1) {\n  return $3 &gt; 0\n    ? $2.reduce(\n        (acc, val) =&gt; acc.concat(\n          Array.isArray(val) \n            ? $1(val, $3 - 1)\n            : val\n        ),\n        []\n      )\n    : $2.slice();\n}":
+  "⩛($1, $2, $3)",
+  
+  //==========================================================================
+  // ERROR HANDLING PATTERNS
+  //==========================================================================
+  
+  // Async function with try-catch wrapper
+  "async function $1($2) {\n  try {\n    $3\n    return $4;\n  } catch (error) {\n    console.error('$5:', error.message);\n    $6\n  }\n}": 
+  "ᕮ.非($1, $2, $3, $4, '$5', $6)",
+  
+  // Regular function with try-catch wrapper
+  "function $1($2) {\n  try {\n    $3\n    return $4;\n  } catch (error) {\n    console.error('$5:', error.message);\n    $6\n  }\n}": 
+  "ᕮ($1, $2, $3, $4, '$5', $6)",
+  
+  // Input validation with error throwing
+  "function $1($2) {\n  if (!$2) {\n    throw new Error('$3');\n  }\n  if (typeof $2 !== '$4') {\n    throw new Error('$5');\n  }\n  $6\n  return $7;\n}": 
+  "ᕯ($1, $2, '$3', '$4', '$5', $6, $7)",
+  
+  // Custom error class
+  "class $1Error extends Error {\n  constructor($2) {\n    super($2);\n    this.name = '$1Error';\n    $3\n  }\n}":
+  "ᕲ($1, $2, $3)",
+  
+  // Async retry logic with exponential backoff
+  "async function $1($2, { maxRetries = 3, delay = 1000, factor = 2 } = {}) {\n  let lastError;\n  \n  for (let attempt = 0; attempt &lt; maxRetries; attempt++) {\n    try {\n      return await $2();\n    } catch (error) {\n      console.warn(`Attempt ${attempt + 1}/$3 failed:`, error.message);\n      lastError = error;\n      \n      const timeout = delay * Math.pow(factor, attempt);\n      await new Promise(resolve =&gt; setTimeout(resolve, timeout));\n    }\n  }\n  \n  throw lastError;\n}":
+  "ᕦ($1, $2, $3)",
+  
+  //==========================================================================
+  // AUTHENTICATION PATTERNS
+  //==========================================================================
+  
+  // JWT verification middleware
+  "function $1(req, res, next) {\n  const token = req.header('$2');\n  if (!token) {\n    return res.status(401).json({ msg: '$3' });\n  }\n  try {\n    const decoded = jwt.verify(token, '$4');\n    req.$5 = decoded.$5;\n    next();\n  } catch (err) {\n    res.status(401).json({ msg: '$6' });\n  }\n}": 
+  "월($1, '$2', '$3', '$4', $5, '$6')",
+  
+  // Login with JWT generation
+  "async function $1(req, res) {\n  const { $2, $3 } = req.body;\n  try {\n    let $4 = await $5.findOne({ $2 });\n    if (!$4) {\n      return res.status(400).json({ msg: '$6' });\n    }\n    const isMatch = await bcrypt.compare($3, $4.$3);\n    if (!isMatch) {\n      return res.status(400).json({ msg: '$7' });\n    }\n    const payload = {\n      $8: $4.id\n    };\n    jwt.sign(payload, '$9', { expiresIn: $10 }, (err, token) =&gt; {\n      if (err) throw err;\n      res.json({ token });\n    });\n  } catch (err) {\n    console.error('$11:', err.message);\n    res.status(500).send('$12');\n  }\n}": 
+  "ꮚ($1, $2, $3, $4, $5, '$6', '$7', $8, '$9', $10, '$11', '$12')",
+  
+  // User registration with password hashing
+  "async function $1(req, res) {\n  const { $2, $3, $4 } = req.body;\n\n  try {\n    let user = await $5.findOne({ $3 });\n    if (user) {\n      return res.status(400).json({ msg: '$6' });\n    }\n\n    user = new $5({\n      $2,\n      $3,\n      $4\n    });\n\n    const salt = await bcrypt.genSalt(10);\n    user.$4 = await bcrypt.hash(user.$4, salt);\n\n    await user.save();\n    \n    const payload = {\n      user: {\n        id: user.id\n      }\n    };\n\n    jwt.sign(\n      payload,\n      '$7',\n      { expiresIn: $8 },\n      (err, token) =&gt; {\n        if (err) throw err;\n        res.json({ token });\n      }\n    );\n  } catch (err) {\n    console.error('$9:', err.message);\n    res.status(500).send('$10');\n  }\n}":
+  "ꮑ($1, $2, $3, $4, $5, '$6', '$7', $8, '$9', '$10')",
+  
+  // OAuth2 authorization flow
+  "function $1(req, res) {\n  const oauth2Client = new OAuth2Client(\n    process.env.$2_CLIENT_ID,\n    process.env.$2_CLIENT_SECRET,\n    '$3'\n  );\n\n  const authUrl = oauth2Client.generateAuthUrl({\n    access_type: 'offline',\n    scope: ['$4', '$5'],\n    prompt: 'consent'\n  });\n\n  res.redirect(authUrl);\n}":
+  "ꮀ($1, $2, '$3', '$4', '$5')",
+  
+  //==========================================================================
+  // FILE OPERATION PATTERNS
+  //==========================================================================
+  
+  // File read with error handling
+  "function $1($2) {\n  try {\n    const data = fs.readFileSync($2, '$3');\n    return data;\n  } catch (error) {\n    console.error('$4:', error.message);\n    $5\n  }\n}": 
+  "ꙮ($1, $2, '$3', '$4', $5)",
+  
+  // File write with error handling
+  "function $1($2, $3) {\n  try {\n    fs.writeFileSync($2, $3);\n    console.log(`$4 ${$2}`);\n    return true;\n  } catch (error) {\n    console.error('$5:', error.message);\n    return false;\n  }\n}": 
+  "웏($1, $2, $3, '$4', '$5')",
+  
+  // Recursive directory traversal
+  "function $1($2) {\n  const results = [];\n  \n  function traverse(dir) {\n    const files = fs.readdirSync(dir);\n    \n    for (const file of files) {\n      const filePath = path.join(dir, file);\n      const stat = fs.statSync(filePath);\n      \n      if (stat.isDirectory()) {\n        traverse(filePath);\n      } else if ($3(file)) {\n        results.push(filePath);\n      }\n    }\n  }\n  \n  traverse($2);\n  return results;\n}":
+  "꙰($1, $2, $3)",
+  
+  // Stream-based file processing
+  "function $1($2, $3) {\n  return new Promise((resolve, reject) =&gt; {\n    const readStream = fs.createReadStream($2);\n    const writeStream = fs.createWriteStream($3);\n    \n    readStream.on('error', reject);\n    writeStream.on('error', reject);\n    writeStream.on('finish', resolve);\n    \n    readStream\n      .pipe($4)\n      .pipe(writeStream);\n  });\n}":
+  "ꚛ($1, $2, $3, $4)",
+  
+  //==========================================================================
+  // TESTING PATTERNS
+  //==========================================================================
+  
+  // Jest test suite
+  "describe('$1', () =&gt; {\n  beforeEach(() =&gt; {\n    $2\n  });\n  \n  afterEach(() =&gt; {\n    $3\n  });\n  \n  test('$4', () =&gt; {\n    $5\n    expect($6).$7($8);\n  });\n  \n  test('$9', () =&gt; {\n    $10\n    expect($11).$12($13);\n  });\n});":
+  "🧪($1, $2, $3, '$4', $5, $6, $7, $8, '$9', $10, $11, $12, $13)",
+  
+  // Mocha test suite
+  "describe('$1', function() {\n  before(function() {\n    $2\n  });\n  \n  after(function() {\n    $3\n  });\n  \n  it('$4', function() {\n    $5\n  });\n  \n  it('$6', function() {\n    $7\n  });\n});":
+  "📋($1, $2, $3, '$4', $5, '$6', $7)",
+  
+  // Test mock function
+  "jest.mock('$1', () =&gt; ({\n  $2: jest.fn().mockImplementation(($3) =&gt; {\n    $4\n    return $5;\n  }),\n  $6: jest.fn().mockResolvedValue($7)\n}));":
+  "🔍($1, $2, $3, $4, $5, $6, $7)",
+  
+  //==========================================================================
+  // UTILITY PATTERNS
+  //==========================================================================
+  
+  // Debounce function
+  "function debounce(func, wait) {\n  let timeout;\n  return function(...args) {\n    const context = this;\n    clearTimeout(timeout);\n    timeout = setTimeout(() =&gt; {\n      func.apply(context, args);\n    }, wait);\n  };\n}":
+  "⏱()",
+  
+  // Throttle function
+  "function throttle(func, limit) {\n  let inThrottle;\n  return function(...args) {\n    const context = this;\n    if (!inThrottle) {\n      func.apply(context, args);\n      inThrottle = true;\n      setTimeout(() =&gt; inThrottle = false, limit);\n    }\n  };\n}":
+  "⏲()",
+  
+  // Deep object clone
+  "function deepClone(obj) {\n  if (obj === null || typeof obj !== 'object') {\n    return obj;\n  }\n  \n  if (Array.isArray(obj)) {\n    return obj.map(item =&gt; deepClone(item));\n  }\n  \n  const cloned = {};\n  for (const key in obj) {\n    if (Object.prototype.hasOwnProperty.call(obj, key)) {\n      cloned[key] = deepClone(obj[key]);\n    }\n  }\n  \n  return cloned;\n}":
+  "📋()",
+  
+  // UUID generation
+  "function generateUUID() {\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n    const r = Math.random() * 16 | 0;\n    const v = c === 'x' ? r : (r &amp; 0x3 | 0x8);\n    return v.toString(16);\n  });\n}":
+  "🆔()"
+};</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-03-20T14:34:08.669Z
+            </div>
+        <script src="prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="sorter.js"></script>
+        <script src="block-navigation.js"></script>
+    </body>
+</html>
+    

@@ -21,6 +21,12 @@ const decompressor = require('./js-kanji-decompressor');
  * @return {string} - Compressed code
  */
 function compress(code, method = 'semantic-kanji', options = {}) {
+  // Check if method is an object (likely intended as options)
+  if (method && typeof method === 'object') {
+    options = method;
+    method = 'semantic-kanji';
+  }
+
   // Set default options that preserve comments and structure
   const defaultOptions = {
     removeComments: false,  // Preserve comments by default
@@ -28,7 +34,7 @@ function compress(code, method = 'semantic-kanji', options = {}) {
     ...options
   };
   
-  switch (method.toLowerCase()) {
+  switch (String(method).toLowerCase()) {
     case 'kanji':
       return jsKanji.compress(code, defaultOptions);
     case 'semantic-kanji':

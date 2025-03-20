@@ -7,7 +7,8 @@
  */
 
 const semanticKanji = require('./semantic-kanji');
-const jsMini = require('./js-mini');
+// jsMini is not present in this codebase, just use the kanji compressor
+// const jsMini = require('./js-mini');
 const jsKanji = require('./js-kanji-compressor');
 const promptGenerator = require('./prompt-generator');
 const utils = require('./utils');
@@ -53,7 +54,8 @@ class SemanticKanjiModule {
     
     switch (method) {
       case 'mini':
-        return jsMini.compress(code);
+        // Just use kanji compression for 'mini' method since jsMini is not available
+        return jsKanji.compress(code, opts);
       case 'kanji':
         return jsKanji.compress(code, opts);
       case 'semantic-kanji':
@@ -86,9 +88,11 @@ class SemanticKanjiModule {
     
     switch (method) {
       case 'mini':
-        return jsMini.decompress(code);
+        // Just use kanji decompression for 'mini' method since jsMini is not available
+        return (jsKanji.decompress || require('./js-kanji-decompressor').decompress)(code, opts);
       case 'kanji':
-        return jsKanji.decompress(code, opts);
+        // Use decompressor module if available, otherwise fall back
+        return (jsKanji.decompress || require('./js-kanji-decompressor').decompress)(code, opts);
       case 'semantic-kanji':
       case 'semantic':
         return semanticKanji.decompress(code, opts);
@@ -124,7 +128,8 @@ class SemanticKanjiModule {
    * @return {Object} - Comparison statistics
    */
   compare(code, options = {}) {
-    const miniCompressed = jsMini.compress(code);
+    // Since jsMini is not available, use jsKanji with different settings for 'mini'
+    const miniCompressed = jsKanji.compress(code, { ...options, preserveLineBreaks: true });
     const kanjiCompressed = jsKanji.compress(code, options);
     const semanticCompressed = semanticKanji.compress(code, options);
     

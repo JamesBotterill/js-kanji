@@ -110,15 +110,38 @@ node cli.js compare myfile.js
 npm install js-kanji
 ```
 
+## Testing
+
+The project includes a comprehensive test suite to ensure all functionality works correctly:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm test -- --coverage
+
+# Run specific test file
+npm test -- tests/js-kanji.test.js
+```
+
+Test files are organized in the `tests/` directory:
+- `index.test.js`: Tests for the main public API
+- `semantic-patterns.test.js`: Tests for semantic pattern recognition
+- `js-kanji.test.js`: Tests for the kanji compressor/decompressor
+- `utils-and-prompt.test.js`: Tests for utility functions and prompt generator
+- `integration.test.js`: Full workflow integration tests
+- `cli.test.js`: Command-line interface tests
+
 ## Contributing
 
 Contributions are welcome! Areas where you can help:
 
 1. Improved character mappings for higher efficiency
-2. Better decompression algorithms
-3. Enhanced error handling
-4. Performance optimizations
-5. Documentation improvements
+2. Enhanced error handling
+3. Performance optimizations
+4. Documentation improvements
+5. Additional test cases
 
 ## License
 

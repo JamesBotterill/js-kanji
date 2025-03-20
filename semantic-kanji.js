@@ -45,6 +45,12 @@ class SemanticKanjiModule {
    * @return {string} - Compressed code
    */
   compress(code, method = this.config.defaultMethod, options = {}) {
+    // Check if method is an object (likely intended as options)
+    if (method && typeof method === 'object') {
+      options = method;
+      method = this.config.defaultMethod;
+    }
+    
     const methodStr = String(method).toLowerCase();
     
     const opts = {
@@ -544,6 +550,12 @@ class SemanticKanjiModule {
 // Add static methods for direct access (backward compatibility with index.js)
 SemanticKanjiModule.compress = function(code, method = 'semantic-kanji', options = {}) {
   try {
+    // Check if method is an object (likely intended as options)
+    if (method && typeof method === 'object') {
+      options = method;
+      method = 'semantic-kanji';
+    }
+    
     const instance = new SemanticKanjiModule();
     return instance.compress(code, method, options);
   } catch (error) {
